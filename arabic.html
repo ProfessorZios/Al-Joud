@@ -116,25 +116,6 @@
       margin-bottom: 4px;
     }
 
-    .phone-group {
-      margin-top: 5px;
-    }
-
-    .phone {
-      font-size: 16px;
-      color: white;
-      direction: ltr; /* Phone number left-to-right */
-    }
-
-    .phone a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .phone a:hover {
-      text-decoration: underline;
-    }
-
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -187,25 +168,15 @@
       border-top: 1px solid #ddd;
     }
 
-    .contact-section h3 {
-      margin-bottom: 20px;
-      font-size: 22px;
-      color: #b30000;
-    }
-
-    .qr-codes {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .qr-codes img {
-      max-height: 140px;
-      min-height: 60px;
-      object-fit: contain;
-    }
+    /* Font Awesome social icon styles are inline */
   </style>
+
+  <!-- Font Awesome CDN for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
   <script>
     const exchangeRate = 89500;
     let showUSD = false;
@@ -321,14 +292,7 @@
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
-        <div class="phone-group">
-          <div class="phone">
-            📞
-            <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer">
-              +961 81 276 214
-            </a>
-          </div>
-        </div>
+        <!-- Phone number removed as requested -->
       </div>
     </header>
 
@@ -340,7 +304,7 @@
       <button onclick="scrollToCategory('كيلو')">كيلو</button>
       <button onclick="scrollToCategory('مرطبات')">مرطبات</button>
       <button onclick="toggleCurrency()" id="currency-btn">عرض بالدولار</button>
-      <button onclick="scrollToCategory('contact')">QR Codes</button>
+      <button onclick="scrollToCategory('contact')">تواصل معنا</button>
       <button onclick="window.location.href='english.html'">English</button>
     </div>
   </div>
@@ -348,10 +312,20 @@
   <div id="menu-container" class="menu-section"></div>
 
   <div id="contact" class="contact-section">
-    <h3>Scan Our QR Codes</h3>
-    <div class="qr-codes">
-      <img src="qr-codez.png" alt="WhatsApp QR" />
-      <img src="qr-code.png" alt="Instagram QR" />
+    <h3>تواصل معنا</h3>
+    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram" style="font-size: 28px;"></i>
+        <span>إنستغرام</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+        <span>واتساب</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+        <span>تيك توك</span>
+      </a>
     </div>
   </div>
 </body>
