@@ -233,13 +233,9 @@
         ["مياه صغير", 20000],
         ["شاي زجاج", 30000],
         ["شاي كرتون", 50000],
-        ["بيبسي زجاج", 30000],
-        ["سفن اب زجاج", 30000],
-        ["ماريندا زجاج", 30000]
+        ["مشروبات غازية زجاج", 30000],
       ]
     };
-
-    // Convert to Arabic numerals and format
     function toArabicDigits(number) {
       return number.toString().replace(/[0-9]/g, d =>
         String.fromCharCode(d.charCodeAt(0) + 0x0660 - 0x0030)).replace(/,/g, '٬');
