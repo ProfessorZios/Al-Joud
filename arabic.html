@@ -172,7 +172,70 @@
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
     }
+    /* Footer social icons container for mobile: Instagram & WhatsApp side by side, TikTok centered below */
+    .social-links {
+      max-width: 300px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      font-size: 20px;
+      align-items: center;
+    }
+    .social-row {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+    .social-links a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    /* Instagram official colors */
+    .instagram {
+      color: #E1306C;
+    }
+    /* WhatsApp official colors */
+    .whatsapp {
+      color: #25D366;
+    }
+    /* TikTok official colors */
+    .tiktok {
+      color: black;
+    }
+    .tiktok-icon {
+      font-size: 28px;
+      color: #69C9D0; /* TikTok cyan */
+      position: relative;
+      margin-right: 4px;
+    }
+    .tiktok-icon::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 14px;
+      height: 28px;
+      background: linear-gradient(45deg, #25F4EE, #FE2C55);
+      clip-path: polygon(30% 0%, 100% 0%, 70% 100%, 0% 100%);
+      opacity: 0.8;
+      z-index: -1;
+      border-radius: 3px;
+    }
   </style>
+
+  <!-- Font Awesome CDN for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
 
   <script>
     const exchangeRate = 89500;
@@ -268,7 +331,7 @@
       renderMenu();
     }
 
-    // Scroll to top
+    // Scroll to top exactly
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -291,9 +354,14 @@
 
     // Header minimize on scroll down, restore on scroll up
     let lastScrollTop = 0;
+    let isScrollingProgrammatically = false;
+
     window.addEventListener('scroll', () => {
+      if (isScrollingProgrammatically) return; // skip while programmatic scroll
+
       const topContainer = document.querySelector('.top-container');
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
       if (currentScroll > lastScrollTop && currentScroll > 100) {
         // Scroll down - minimize header
         topContainer.classList.add('minimized');
@@ -301,10 +369,36 @@
         // Scroll up - restore header
         topContainer.classList.remove('minimized');
       }
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
-    window.onload = renderMenu;
+    // Prevent minimize/maximize flicker when clicking first button (scrollToTop)
+    function scrollToTopSmooth() {
+      const topContainer = document.querySelector('.top-container');
+      isScrollingProgrammatically = true;
+      topContainer.classList.remove('minimized');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        isScrollingProgrammatically = false;
+      }, 800); // allow scroll event to finish
+    }
+
+    // Override scrollToCategory for 'top' to use above
+    function scrollToCategorySafe(id) {
+      if (id === 'top') {
+        scrollToTopSmooth();
+        return;
+      }
+      scrollToCategory(id);
+    }
+
+    window.onload = () => {
+      renderMenu();
+
+      // Override the first button's click for smooth top scroll without flicker
+      document.querySelector('.toolbar button').onclick = () => scrollToTopSmooth();
+    };
   </script>
 </head>
 <body>
@@ -319,15 +413,15 @@
     </header>
 
     <div class="toolbar">
-      <button onclick="scrollToCategory('top')">الرئيسية</button>
-      <button onclick="scrollToCategory('صحن زجاج')">صحن زجاج</button>
-      <button onclick="scrollToCategory('صحن سفري')">صحن سفري</button>
-      <button onclick="scrollToCategory('ربع كيلو')">ربع كيلو</button>
-      <button onclick="scrollToCategory('نص كيلو')">نص كيلو</button>
-      <button onclick="scrollToCategory('كيلو')">كيلو</button>
-      <button onclick="scrollToCategory('مرطبات')">مرطبات</button>
+      <button>الرئيسية</button>
+      <button onclick="scrollToCategorySafe('صحن زجاج')">صحن زجاج</button>
+      <button onclick="scrollToCategorySafe('صحن سفري')">صحن سفري</button>
+      <button onclick="scrollToCategorySafe('ربع كيلو')">ربع كيلو</button>
+      <button onclick="scrollToCategorySafe('نص كيلو')">نص كيلو</button>
+      <button onclick="scrollToCategorySafe('كيلو')">كيلو</button>
+      <button onclick="scrollToCategorySafe('مرطبات')">مرطبات</button>
       <button onclick="toggleCurrency()" id="currency-btn">عرض بالدولار</button>
-      <button onclick="scrollToCategory('contact')">تواصل معنا</button>
+      <button onclick="scrollToCategorySafe('contact')">تواصل معنا</button>
       <button onclick="window.location.href='english.html'">English</button>
     </div>
   </div>
@@ -335,24 +429,25 @@
   <div id="menu-container" class="menu-section"></div>
 
   <div id="contact" class="contact-section">
-    <h3>تواصل معنا</h3>
-    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
-      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-        <i class="fab fa-instagram" style="font-size: 28px;"></i>
-        <span>إنستغرام</span>
-      </a>
-      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
-        <span>واتساب</span>
-      </a>
-      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
-        <span>تيك توك</span>
-      </a>
+    <h3>ابقَ على تواصل معنا</h3>
+    <div class="social-links">
+      <div class="social-row">
+        <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram">
+          <i class="fab fa-instagram" style="font-size: 28px;"></i>
+          <span>إنستغرام</span>
+        </a>
+        <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+          <span>واتساب</span>
+        </a>
+      </div>
+      <div style="width:100%; display:flex; justify-content:center;">
+        <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" class="tiktok" aria-label="TikTok" style="font-weight: bold; font-size: 20px; display: flex; align-items: center; gap: 8px;">
+          <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+          <span>تيك توك</span>
+        </a>
+      </div>
     </div>
   </div>
-
-  <!-- Font Awesome CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
