@@ -1,170 +1,173 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مطعم الجود - قائمة الطعام</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة مطعم الجود</title>
   <style>
     html {
-      scroll-padding-top: 130px;
-      scroll-behavior: smooth;
+      scroll-padding-top: 120px;
     }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fefefe;
       margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #fefefe;
+      color: #000;
     }
+
     header {
       position: sticky;
       top: 0;
-      background-color: #c8102e;
+      background-color: red;
       color: white;
-      text-align: center;
-      padding: 10px 0;
+      padding: 15px 10px;
       z-index: 1000;
+      transition: padding 0.3s ease;
     }
+
     @media (max-width: 768px) {
       header {
-        padding: 5px 0;
+        padding: 8px 10px;
       }
-      nav button {
-        font-size: 13px;
-        padding: 8px;
+
+      .footer-icons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-icons .top-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer-icons .bottom-row {
+        display: flex;
+        justify-content: center;
       }
     }
+
     nav {
       display: flex;
+      justify-content: space-around;
       flex-wrap: wrap;
-      justify-content: center;
-      background-color: #c8102e;
+      background-color: red;
     }
+
     nav button {
-      background: white;
-      color: #c8102e;
+      background: none;
       border: none;
-      padding: 10px 15px;
-      margin: 5px;
+      color: white;
       font-size: 16px;
+      padding: 10px;
       cursor: pointer;
     }
-    section {
+
+    h2 {
+      padding-top: 50px;
+      margin-top: -50px;
+    }
+
+    footer {
+      background-color: #fff;
+      text-align: center;
       padding: 20px;
     }
-    h2 {
-      margin-top: 100px;
-      color: #c8102e;
+
+    footer h3 {
+      color: #000;
     }
+
+    .footer-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .footer-icons img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .footer-icons .top-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .footer-icons .bottom-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .instagram-icon {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    section {
+      padding: 10px 20px;
+    }
+
     ul {
       list-style: none;
       padding: 0;
     }
+
     li {
-      padding: 5px 0;
-    }
-    footer {
-      background-color: #f8f8f8;
-      color: #000;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    .footer-icons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin: 10px 0;
-    }
-    .footer-icons a {
-      text-decoration: none;
-      font-size: 24px;
-    }
-    .instagram {
-      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .whatsapp {
-      color: #25D366;
-    }
-    .tiktok {
-      color: #000;
-    }
-    .tiktok-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    @media (max-width: 768px) {
-      .footer-icons {
-        flex-direction: row;
-        justify-content: center;
-      }
-      .tiktok-container {
-        margin-top: 10px;
-      }
+      margin-bottom: 10px;
     }
   </style>
-  <script>
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  </script>
 </head>
 <body>
-  <header>
-    <h1>مطعم الجود</h1>
-  </header>
-  <nav>
-    <button onclick="scrollToSection('mash')">مقبلات</button>
-    <button onclick="scrollToSection('meat')">لحوم</button>
-    <button onclick="scrollToSection('quarter')">ربع كيلو</button>
-    <button onclick="scrollToSection('half')">نصف كيلو</button>
-  </nav>
 
-  <section id="mash">
-    <h2>مقبلات</h2>
-    <ul>
-      <li>حمص مدقوق<br>½ أوقية لحمة</li>
-      <li>حمص مدقوق<br>١ أوقية لحمة</li>
-    </ul>
-  </section>
+<header>
+  <h1>قائمة الطعام</h1>
+</header>
 
-  <section id="meat">
-    <h2>لحوم</h2>
-    <ul>
-      <li>سيخ لحمة</li>
-      <li>دجاج مشوي</li>
-    </ul>
-  </section>
+<nav>
+  <button onclick="document.getElementById('section1').scrollIntoView()">المقبلات</button>
+  <button onclick="document.getElementById('section2').scrollIntoView()">الأطباق الرئيسية</button>
+</nav>
 
-  <section id="quarter">
-    <h2>ربع كيلو</h2>
-    <ul>
-      <li>فول بالليمون</li>
-      <li>فول بالطحينة</li>
-    </ul>
-  </section>
+<section id="section1">
+  <h2>المقبلات</h2>
+  <ul>
+    <li>حمص مدقوق<br>نص أوقية لحمة</li>
+    <li>بابا غنوج</li>
+  </ul>
+</section>
 
-  <section id="half">
-    <h2>نصف كيلو</h2>
-    <ul>
-      <li>مسبحة باذنجان</li>
-      <li>حمص بلحمة</li>
-    </ul>
-  </section>
+<section id="section2">
+  <h2>الأطباق الرئيسية</h2>
+  <ul>
+    <li>كباب</li>
+    <li>مشاوي</li>
+  </ul>
+</section>
 
-  <footer>
-    <h3>ابقَ على تواصل معنا</h3>
-    <div class="footer-icons">
-      <a class="instagram" href="#" aria-label="Instagram">📸</a>
-      <a class="whatsapp" href="#" aria-label="WhatsApp">📱</a>
+<footer>
+  <h3>ابقَ على تواصل معنا</h3>
+  <div class="footer-icons">
+    <div class="top-row">
+      <a href="https://www.instagram.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
+      <a href="https://wa.me/96123456789" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      </a>
     </div>
-    <div class="tiktok-container">
-      <a class="tiktok" href="#" aria-label="TikTok">🎵</a>
+    <div class="bottom-row">
+      <a href="https://www.tiktok.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/en/0/0a/TikTok_logo.svg" alt="TikTok">
+      </a>
     </div>
-  </footer>
+  </div>
+</footer>
+
 </body>
 </html>
