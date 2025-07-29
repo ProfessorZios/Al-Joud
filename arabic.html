@@ -158,6 +158,7 @@
       font-size: 20px;
     }
 
+    /* Fix for long phrases to wrap nicely on mobile */
     .menu-item span:first-child {
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -169,6 +170,28 @@
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
+    }
+
+    /* Fix footer icons so they don't get cut off or overflow */
+    .contact-section div {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0 10px;
+    }
+
+    .contact-section a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      min-width: 110px;
+      box-sizing: border-box;
     }
   </style>
 
@@ -188,8 +211,8 @@
         ["حب بحامض", 150000],
         ["حب بطحينة", 150000],
         ["حمص مدقوق", 150000],
-        ["حمص مدقوق مع&#8203; نص&#8203; اوقية&#8203; لحمة", 280000],
-        ["حمص مدقوق مع&#8203; اوقية&#8203; لحمة", 380000],
+        ["حمص مدقوق مع<wbr> نص<wbr> اوقية<wbr> لحمة", 280000],
+        ["حمص مدقوق مع<wbr> اوقية<wbr> لحمة", 380000],
         ["فتة", 180000],
         ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
@@ -201,8 +224,8 @@
         ["حب بحامض", 200000],
         ["حب بطحينة", 200000],
         ["حمص مدقوق", 200000],
-        ["حمص مدقوق مع&#8203; نص&#8203; اوقية&#8203; لحمة", 320000],
-        ["حمص مدقوق مع&#8203; اوقية&#8203; لحمة", 420000],
+        ["حمص مدقوق مع<wbr> نص<wbr> اوقية<wbr> لحمة", 320000],
+        ["حمص مدقوق مع<wbr> اوقية<wbr> لحمة", 420000],
         ["فتة", 220000],
         ["ماليزية", 220000],
         ["بيض", 220000],
@@ -284,7 +307,7 @@
   <div class="top-container">
     <header>
       <div class="header-left">
-        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo">
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo" />
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
@@ -308,16 +331,16 @@
 
   <div id="contact" class="contact-section">
     <h3>تواصل معنا</h3>
-    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
-      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+    <div>
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000;">
         <i class="fab fa-instagram" style="font-size: 28px;"></i>
         <span>إنستغرام</span>
       </a>
-      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
         <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
         <span>واتساب</span>
       </a>
-      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black;">
         <i class="fab fa-tiktok" style="font-size: 28px;"></i>
         <span>تيك توك</span>
       </a>
