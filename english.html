@@ -186,60 +186,60 @@
 
     const menuData = {
       "Glass Plate": [
-    ["Foul with Lemon", 150000],
-    ["Foul with Tahini", 150000],
-    ["Habb with Lemon", 150000],
-    ["Habb with Tahini", 150000],
-    ["Mashed Hummus", 150000],
-    ["Mashed Hummus with <wbr>½ oz Meat", 280000],
-    ["Mashed Hummus with <wbr>1 oz Meat", 380000],
-    ["Fatteh", 180000],
-    ["Maliziyyeh", 180000],
-    ["Labneh with Side Dish", 150000],
-    ["Eggs", 180000]
-  ],
-  "Takeaway Plate": [
-    ["Foul with Lemon", 200000],
-    ["Foul with Tahini", 200000],
-    ["Habb with Lemon", 200000],
-    ["Habb with Tahini", 200000],
-    ["Mashed Hummus", 200000],
-    ["Mashed Hummus with <wbr>½ oz Meat", 320000],
-    ["Mashed Hummus with <wbr>1 oz Meat", 420000],
-    ["Fatteh", 220000],
-    ["Maliziyyeh", 220000],
-    ["Eggs", 220000],
-    ["Labneh with Side Dish", 150000]
-  ],
-  " ½ Kilo": [
-    ["Foul with Lemon", 130000],
-    ["Foul with Tahini", 130000],
-    ["Habb with Lemon", 130000],
-    ["Habb with Tahini", 130000],
-    ["Mashed Hummus", 130000]
-  ],
-  "Kilo": [
-    ["Foul with Lemon", 260000],
-    ["Foul with Tahini", 260000],
-    ["Habb with Lemon", 260000],
-    ["Habb with Tahini", 260000],
-    ["Mashed Hummus", 260000]
-  ],
-       "¼ Kilo": [
-    ["Foul with Lemon", 80000],
-    ["Foul with Tahini", 80000],
-    ["Habb with Lemon", 80000],
-    ["Habb with Tahini", 80000],
-    ["Mashed Hummus", 80000]
-  ],
-  "Drinks": [
-    ["Large Water", 40000],
-    ["Small Water", 20000],
-    ["Glass Tea", 30000],
-    ["Carton Tea", 50000],
-    ["Soft Drinks", 30000],
-  ]
-};
+        ["Foul with Lemon", 150000],
+        ["Foul with Tahini", 150000],
+        ["Habb with Lemon", 150000],
+        ["Habb with Tahini", 150000],
+        ["Mashed Hummus", 150000],
+        ["Mashed Hummus with <wbr>½ oz Meat", 280000],
+        ["Mashed Hummus with <wbr>1 oz Meat", 380000],
+        ["Fatteh", 180000],
+        ["Maliziyyeh", 180000],
+        ["Labneh with Side Dish", 150000],
+        ["Eggs", 180000]
+      ],
+      "Takeaway Plate": [
+        ["Foul with Lemon", 200000],
+        ["Foul with Tahini", 200000],
+        ["Habb with Lemon", 200000],
+        ["Habb with Tahini", 200000],
+        ["Mashed Hummus", 200000],
+        ["Mashed Hummus with <wbr>½ oz Meat", 320000],
+        ["Mashed Hummus with <wbr>1 oz Meat", 420000],
+        ["Fatteh", 220000],
+        ["Maliziyyeh", 220000],
+        ["Eggs", 220000],
+        ["Labneh with Side Dish", 150000]
+      ],
+      " ½ Kilo": [
+        ["Foul with Lemon", 130000],
+        ["Foul with Tahini", 130000],
+        ["Habb with Lemon", 130000],
+        ["Habb with Tahini", 130000],
+        ["Mashed Hummus", 130000]
+      ],
+      "Kilo": [
+        ["Foul with Lemon", 260000],
+        ["Foul with Tahini", 260000],
+        ["Habb with Lemon", 260000],
+        ["Habb with Tahini", 260000],
+        ["Mashed Hummus", 260000]
+      ],
+      "¼ Kilo": [
+        ["Foul with Lemon", 80000],
+        ["Foul with Tahini", 80000],
+        ["Habb with Lemon", 80000],
+        ["Habb with Tahini", 80000],
+        ["Mashed Hummus", 80000]
+      ],
+      "Drinks": [
+        ["Large Water", 40000],
+        ["Small Water", 20000],
+        ["Glass Tea", 30000],
+        ["Carton Tea", 50000],
+        ["Soft Drinks", 30000]
+      ]
+    };
 
     function renderMenu() {
       const container = document.getElementById("menu-container");
@@ -253,10 +253,18 @@
         items.forEach(([name, price]) => {
           const div = document.createElement("div");
           div.className = "menu-item";
-          const priceText = showUSD
+
+          const nameSpan = document.createElement("span");
+          nameSpan.innerHTML = name;  // <-- Render HTML tags like <wbr> properly
+
+          const priceSpan = document.createElement("span");
+          priceSpan.textContent = showUSD
             ? `${(price / exchangeRate).toFixed(2)} $`
             : `${price.toLocaleString()} L.L.`;
-          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
+
+          div.appendChild(nameSpan);
+          div.appendChild(priceSpan);
+
           container.appendChild(div);
         });
       }
@@ -298,9 +306,9 @@
     <div class="toolbar">
       <button onclick="scrollToCategory('Glass Plate')">Glass Plate</button>
       <button onclick="scrollToCategory('Takeaway Plate')">Takeaway Plate</button>
-      <button onclick="scrollToCategory('Quarter Kilo')"> ½ Kilo</button>
-      <button onclick="scrollToCategory('Half Kilo')">Kilo</button>
-      <button onclick="scrollToCategory('Kilo')">¼ Kilo</button>
+      <button onclick="scrollToCategory(' ½ Kilo')">½ Kilo</button>
+      <button onclick="scrollToCategory('Kilo')">Kilo</button>
+      <button onclick="scrollToCategory('¼ Kilo')">¼ Kilo</button>
       <button onclick="scrollToCategory('Drinks')">Drinks</button>
       <button onclick="toggleCurrency()" id="currency-btn">Show in L.L.</button>
       <button onclick="scrollToCategory('contact')">Stay Connected</button>
