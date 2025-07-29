@@ -221,7 +221,7 @@
         ["حب بطحينة", 260000],
         ["حمص مدقوق", 260000]
       ],
-       "ربع كيلو": [
+      "ربع كيلو": [
         ["فول بحامض", 80000],
         ["فول بطحينة", 80000],
         ["حب بحامض", 80000],
@@ -233,9 +233,10 @@
         ["مياه صغير", 20000],
         ["شاي زجاج", 30000],
         ["شاي كرتون", 50000],
-        ["مشروبات غازية زجاج", 30000],
+        ["مشروبات غازية زجاج", 30000]
       ]
     };
+
     function toArabicDigits(number) {
       return number.toString().replace(/[0-9]/g, d =>
         String.fromCharCode(d.charCodeAt(0) + 0x0660 - 0x0030)).replace(/,/g, '٬');
@@ -252,10 +253,18 @@
         items.forEach(([name, price]) => {
           const div = document.createElement("div");
           div.className = "menu-item";
-          const priceText = showUSD
+
+          const nameSpan = document.createElement("span");
+          nameSpan.innerHTML = name; // Render HTML tags like <wbr> properly
+
+          const priceSpan = document.createElement("span");
+          priceSpan.textContent = showUSD
             ? `${toArabicDigits((price / exchangeRate).toFixed(2))} $`
             : `${toArabicDigits(price.toLocaleString())} ل.ل.`;
-          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
+
+          div.appendChild(nameSpan);
+          div.appendChild(priceSpan);
+
           container.appendChild(div);
         });
       }
@@ -287,7 +296,6 @@
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
-        <!-- Phone number removed as requested -->
       </div>
     </header>
 
