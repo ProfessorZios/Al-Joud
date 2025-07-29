@@ -67,7 +67,6 @@
         text-align: center;
       }
 
-      
       .header-left {
         order: 0;
         margin-bottom: 10px;
@@ -160,14 +159,19 @@
       font-size: 20px;
     }
 
+    /* Fix for long phrases to wrap nicely on mobile */
+    .menu-item span:first-child {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
     .contact-section {
       text-align: center;
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
     }
-
-    /* Font Awesome social icon styles are inline */
   </style>
 
   <!-- Font Awesome CDN for social icons -->
@@ -253,18 +257,10 @@
         items.forEach(([name, price]) => {
           const div = document.createElement("div");
           div.className = "menu-item";
-
-          const nameSpan = document.createElement("span");
-          nameSpan.innerHTML = name; // Render HTML tags like <wbr> properly
-
-          const priceSpan = document.createElement("span");
-          priceSpan.textContent = showUSD
+          const priceText = showUSD
             ? `${toArabicDigits((price / exchangeRate).toFixed(2))} $`
             : `${toArabicDigits(price.toLocaleString())} ل.ل.`;
-
-          div.appendChild(nameSpan);
-          div.appendChild(priceSpan);
-
+          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
           container.appendChild(div);
         });
       }
@@ -276,7 +272,6 @@
       renderMenu();
     }
 
-    // Smooth scroll adjustment to show h2 fully below sticky header
     function scrollToCategory(id) {
       const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
