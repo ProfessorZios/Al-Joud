@@ -275,6 +275,7 @@
     function scrollToCategory(id) {
       const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
+      if (!element) return;
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementTop - headerHeight,
