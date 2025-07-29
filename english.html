@@ -96,24 +96,7 @@
       margin-bottom: 4px;
     }
 
-    .phone-group {
-      margin-top: 5px;
-    }
-
-    .phone {
-      font-size: 16px;
-      color: white;
-      direction: ltr;
-    }
-
-    .phone a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .phone a:hover {
-      text-decoration: underline;
-    }
+    /* Removed phone styles as phone no longer shows */
 
     .toolbar {
       display: flex;
@@ -173,19 +156,29 @@
       color: #b30000;
     }
 
-    .qr-codes {
+    /* Social icons container */
+    .social-links {
       display: flex;
       justify-content: center;
       gap: 40px;
-      flex-wrap: wrap;
+      font-size: 20px;
+      align-items: center;
     }
 
-    .qr-codes img {
-      max-height: 140px;
-      min-height: 60px;
-      object-fit: contain;
+    .social-links a {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
   </style>
+
+  <!-- Font Awesome CDN for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
 
   <script>
     const exchangeRate = 89500;
@@ -193,62 +186,61 @@
 
     const menuData = {
       "Glass Plate": [
-        ["Foul with Lemon", 150000],
-        ["Foul with Tahini", 150000],
-        ["Habb with Lemon", 150000],
-        ["Habb with Tahini", 150000],
-        ["Mashed Hummus", 150000],
-        ["Hummus + Half oz Meat", 280000],
-        ["Hummus + 1 oz Meat", 380000],
-        ["Fatteh", 180000],
-        ["Maliziyeh", 180000],
-        ["Labneh with sides", 150000],
-        ["Eggs", 180000]
-      ],
-      "Takeaway Plate": [
-        ["Foul with Lemon", 200000],
-        ["Foul with Tahini", 200000],
-        ["Habb with Lemon", 200000],
-        ["Habb with Tahini", 200000],
-        ["Mashed Hummus", 200000],
-        ["Mashed Hummus with ½ Ounce Meat", 320000],
-        ["Mashed Hummus with 1 Ounce Meat", 420000],
-        ["Fatteh", 220000],
-        ["Maliziyeh", 220000],
-        ["Eggs", 220000],
-        ["Traditional Lebanese Breakfast", 150000]
-      ],
-      "Quarter Kilo": [
-        ["Foul with Lemon", 80000],
-        ["Foul with Tahini", 80000],
-        ["Habb with Lemon", 80000],
-        ["Habb with Tahini", 80000],
-        ["Mashed Hummus", 80000]
-      ],
-      "Half Kilo": [
-        ["Foul with Lemon", 130000],
-        ["Foul with Tahini", 130000],
-        ["Habb with Lemon", 130000],
-        ["Habb with Tahini", 130000],
-        ["Mashed Hummus", 130000]
-      ],
-      "Kilo": [
-        ["Foul with Lemon", 260000],
-        ["Foul with Tahini", 260000],
-        ["Habb with Lemon", 260000],
-        ["Habb with Tahini", 260000],
-        ["Mashed Hummus", 260000]
-      ],
-      "Drinks": [
-        ["Large Water", 40000],
-        ["Small Water", 20000],
-        ["Glass Tea", 30000],
-        ["Carton Tea", 50000],
-        ["Glass Pepsi", 30000],
-        ["Glass 7Up", 30000],
-        ["Glass Miranda", 30000]
-      ]
-    };
+    ["Foul with Lemon", 150000],
+    ["Foul with Tahini", 150000],
+    ["Chickpea with Lemon", 150000],
+    ["Chickpea with Tahini", 150000],
+    ["Mashed Hummus", 150000],
+    ["Mashed Hummus with <wbr>½ oz Meat", 280000],
+    ["Mashed Hummus with <wbr>1 oz Meat", 380000],
+    ["Fatteh", 180000],
+    ["Maliziyyeh", 180000],
+    ["Labneh with Side Dish", 150000],
+    ["Eggs", 180000]
+  ],
+  "Takeaway Plate": [
+    ["Foul with Lemon", 200000],
+    ["Foul with Tahini", 200000],
+    ["Chickpea with Lemon", 200000],
+    ["Chickpea with Tahini", 200000],
+    ["Mashed Hummus", 200000],
+    ["Mashed Hummus with <wbr>½ oz Meat", 320000],
+    ["Mashed Hummus with <wbr>1 oz Meat", 420000],
+    ["Fatteh", 220000],
+    ["Maliziyyeh", 220000],
+    ["Eggs", 220000],
+    ["Labneh with Side Dish", 150000]
+  ],
+  "Half Kilo": [
+    ["Foul with Lemon", 130000],
+    ["Foul with Tahini", 130000],
+    ["Chickpea with Lemon", 130000],
+    ["Chickpea with Tahini", 130000],
+    ["Mashed Hummus", 130000]
+  ],
+  "Kilo": [
+    ["Foul with Lemon", 260000],
+    ["Foul with Tahini", 260000],
+    ["Chickpea with Lemon", 260000],
+    ["Chickpea with Tahini", 260000],
+    ["Mashed Hummus", 260000]
+  ],
+  "Quarter Kilo": [
+    ["Foul with Lemon", 80000],
+    ["Foul with Tahini", 80000],
+    ["Chickpea with Lemon", 80000],
+    ["Habb with Tahini", 80000],
+    ["Mashed Hummus", 80000]
+  ],
+  "Drinks": [
+    ["Soft Drinks", 30000],
+    ["Glass Tea", 30000],
+    ["Carton Tea", 50000],
+    ["Small Water", 20000],
+    ["Large Water", 40000],
+    
+  ]
+};
 
     function renderMenu() {
       const container = document.getElementById("menu-container");
@@ -300,26 +292,19 @@
       </div>
       <div class="header-right">
         <div class="title">Al-Joud Restaurant</div>
-        <div class="phone-group">
-          <div class="phone">
-            📞
-            <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer">
-			+961 81 276 214
-			</a>
-          </div>
-        </div>
+        <!-- Phone number removed -->
       </div>
     </header>
 
     <div class="toolbar">
       <button onclick="scrollToCategory('Glass Plate')">Glass Plate</button>
       <button onclick="scrollToCategory('Takeaway Plate')">Takeaway Plate</button>
-      <button onclick="scrollToCategory('Quarter Kilo')">Quarter Kilo</button>
       <button onclick="scrollToCategory('Half Kilo')">Half Kilo</button>
       <button onclick="scrollToCategory('Kilo')">Kilo</button>
+      <button onclick="scrollToCategory('Quarter Kilo')">Quarter Kilo</button>
       <button onclick="scrollToCategory('Drinks')">Drinks</button>
       <button onclick="toggleCurrency()" id="currency-btn">Show in L.L.</button>
-      <button onclick="scrollToCategory('contact')">Scan Our QR Codes</button>
+      <button onclick="scrollToCategory('contact')">Stay Connected</button>
       <button onclick="window.location.href='arabic.html'">العربية</button>
     </div>
   </div>
@@ -327,10 +312,20 @@
   <div id="menu-container" class="menu-section"></div>
 
   <div id="contact" class="contact-section">
-    <h3>Stay Connected</h3>
-    <div class="qr-codes">
-      <img src="qr-codez.png" alt="WhatsApp QR" />
-      <img src="qr-code.png" alt="Instagram QR" />
+    <h3>Contact Us</h3>
+    <div class="social-links">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000;">
+        <i class="fab fa-instagram" style="font-size: 28px;"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
+        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black;">
+        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+        <span>TikTok</span>
+      </a>
     </div>
   </div>
 </body>
