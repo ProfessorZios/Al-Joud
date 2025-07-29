@@ -181,7 +181,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
 
-  <script>
+<script>
   const exchangeRate = 89500;
   let showUSD = false;
 
@@ -248,7 +248,9 @@
     let formatted = Number(number).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     // Replace digits with Arabic digits and comma with Arabic comma
     return formatted
-      .replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+      .replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d])
+      .replace(/,/g, ',');
+  }
 
   function renderMenu() {
     const container = document.getElementById("menu-container");
