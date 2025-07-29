@@ -96,8 +96,6 @@
       margin-bottom: 4px;
     }
 
-    /* Removed phone styles as phone no longer shows */
-
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -141,6 +139,13 @@
       padding: 10px 0;
       border-bottom: 1px solid #eee;
       font-size: 20px;
+    }
+
+    /* Fix for long phrases to wrap nicely on mobile */
+    .menu-item span:first-child {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
     }
 
     .contact-section {
@@ -211,7 +216,7 @@
         ["Eggs", 220000],
         ["Labneh with Side Dish", 150000]
       ],
-      " ½ Kilo": [
+      "½ Kilo": [
         ["Foul with Lemon", 130000],
         ["Foul with Tahini", 130000],
         ["Habb with Lemon", 130000],
@@ -253,18 +258,10 @@
         items.forEach(([name, price]) => {
           const div = document.createElement("div");
           div.className = "menu-item";
-
-          const nameSpan = document.createElement("span");
-          nameSpan.innerHTML = name;  // <-- Render HTML tags like <wbr> properly
-
-          const priceSpan = document.createElement("span");
-          priceSpan.textContent = showUSD
+          const priceText = showUSD
             ? `${(price / exchangeRate).toFixed(2)} $`
             : `${price.toLocaleString()} L.L.`;
-
-          div.appendChild(nameSpan);
-          div.appendChild(priceSpan);
-
+          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
           container.appendChild(div);
         });
       }
@@ -299,14 +296,13 @@
       </div>
       <div class="header-right">
         <div class="title">Al-Joud Restaurant</div>
-        <!-- Phone number removed -->
       </div>
     </header>
 
     <div class="toolbar">
       <button onclick="scrollToCategory('Glass Plate')">Glass Plate</button>
       <button onclick="scrollToCategory('Takeaway Plate')">Takeaway Plate</button>
-      <button onclick="scrollToCategory(' ½ Kilo')">½ Kilo</button>
+      <button onclick="scrollToCategory('½ Kilo')">½ Kilo</button>
       <button onclick="scrollToCategory('Kilo')">Kilo</button>
       <button onclick="scrollToCategory('¼ Kilo')">¼ Kilo</button>
       <button onclick="scrollToCategory('Drinks')">Drinks</button>
