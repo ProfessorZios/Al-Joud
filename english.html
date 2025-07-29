@@ -23,13 +23,15 @@
       z-index: 1000;
       background-color: #b30000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: height 0.3s ease;
-      height: 140px;
+      transition: height 0.3s ease, padding 0.3s ease;
+      padding: 10px 0;
+      height: 110px;
       overflow: visible;
     }
 
     .top-container.shrink {
-      height: 80px;
+      height: 70px;
+      padding: 5px 0;
     }
 
     header {
@@ -37,13 +39,9 @@
       align-items: center;
       justify-content: space-between;
       color: white;
-      padding: 10px 20px;
+      padding: 0 20px;
       flex-wrap: wrap;
       transition: padding 0.3s ease;
-    }
-
-    .top-container.shrink header {
-      padding: 5px 20px;
     }
 
     .header-left {
@@ -75,20 +73,19 @@
 
     .top-container.shrink .logo {
       height: 6vw;
-      max-height: 80px;
       min-height: 40px;
-      padding: 3px;
     }
 
     @media (max-width: 600px) {
       header {
         flex-direction: column;
         text-align: center;
+        padding: 0 10px;
       }
 
       .header-left {
         order: 0;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
       .header-right {
@@ -101,38 +98,13 @@
       }
 
       .top-container.shrink {
-        height: 100px;
+        height: 60px;
+        padding: 3px 0;
       }
+
       .top-container.shrink .logo {
         height: 8vw;
-        min-height: 35px;
-      }
-
-      .toolbar {
-        flex-wrap: nowrap !important;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        justify-content: flex-start !important;
-        scrollbar-width: thin;
-        scrollbar-color: #b30000 #f1f1f1;
-        background: white;
-        padding: 10px 5px;
-      }
-      .toolbar::-webkit-scrollbar {
-        height: 8px;
-      }
-      .toolbar::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      .toolbar::-webkit-scrollbar-thumb {
-        background-color: #b30000;
-        border-radius: 4px;
-      }
-
-      .toolbar button {
-        flex-grow: 0 !important;
-        min-width: 120px;
-        white-space: nowrap;
+        min-height: 30px;
       }
     }
 
@@ -140,25 +112,37 @@
       font-size: 26px;
       font-weight: bold;
       margin-bottom: 4px;
-      user-select: none;
+      transition: font-size 0.3s ease;
+    }
+
+    .top-container.shrink .title {
+      font-size: 20px;
     }
 
     .toolbar {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
       gap: 10px;
       padding: 10px;
-      background: white;
-      box-shadow: 0 2px 5px rgb(179 0 0 / 0.3);
-      z-index: 1001;
-      position: sticky;
-      top: 140px;
-      transition: top 0.3s ease;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #b30000 #f1f1f1;
+      background-color: white;
     }
 
-    .top-container.shrink + .toolbar {
-      top: 80px;
+    .toolbar::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .toolbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .toolbar::-webkit-scrollbar-thumb {
+      background-color: #b30000;
+      border-radius: 4px;
     }
 
     .toolbar button {
@@ -170,15 +154,13 @@
       cursor: pointer;
       font-weight: bold;
       min-width: 120px;
-      flex-grow: 1;
+      flex-shrink: 0;
       white-space: nowrap;
-      user-select: none;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.2s ease;
     }
 
     .toolbar button:hover {
-      background-color: #b30000;
-      color: white;
+      background-color: #f4d6d6;
     }
 
     .menu-section {
@@ -216,57 +198,62 @@
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
-      clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
-      position: relative;
-      overflow: hidden;
+      max-width: 800px;
+      margin: 40px auto 20px auto;
     }
 
-    .contact-section h3 {
-      margin-bottom: 25px;
-      font-weight: bold;
-    }
-
-    .contact-links {
+    /* Social icons 2-1 layout */
+    .contact-icons {
       display: flex;
       justify-content: center;
       gap: 40px;
-      font-size: 20px;
-      align-items: center;
       flex-wrap: wrap;
+      max-width: 300px;
+      margin: 0 auto;
     }
-
-    .contact-links a {
-      color: inherit;
-      text-decoration: none;
+    .contact-icons a {
       display: flex;
       align-items: center;
       gap: 8px;
-      user-select: none;
-      transition: color 0.3s ease;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
     }
 
-    .contact-links a:hover {
-      color: #b30000;
-    }
-
-    /* Instagram multicolor gradient for icon */
+    /* Official brand colors */
     .instagram-icon {
       font-size: 28px;
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, 
-                  #d6249f 60%, #285AEB 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      user-select: none;
+      color: #E1306C;
+    }
+    .instagram-text {
+      color: #E1306C;
+    }
+
+    .whatsapp-icon {
+      font-size: 28px;
+      color: #25D366;
+    }
+    .whatsapp-text {
+      color: #25D366;
+    }
+
+    .tiktok-icon {
+      font-size: 28px;
+      color: black;
+    }
+    .tiktok-text {
+      color: black;
     }
 
     @media (max-width: 600px) {
-      .contact-section {
-        padding: 30px 10px 50px;
-        clip-path: none;
+      .contact-icons {
+        max-width: 100%;
+        justify-content: space-around;
       }
-      .contact-links {
-        flex-direction: column;
-        gap: 25px;
+      .contact-icons a {
+        font-size: 18px;
+        flex: 1 1 40%;
+        justify-content: center;
       }
     }
   </style>
@@ -279,7 +266,7 @@
 
   <script>
     const exchangeRate = 89500;
-    let showUSD = false; // Start with LBP as per your original code
+    let showUSD = true;
 
     const menuData = {
       "Glass Plate": [
@@ -370,8 +357,7 @@
     }
 
     function scrollToCategory(id) {
-      const headerHeight = document.querySelector('.top-container').offsetHeight
-        + document.querySelector('.toolbar').offsetHeight;
+      const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
       if (!element) return;
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
@@ -381,13 +367,13 @@
       });
     }
 
-    // Shrink header on scroll
-    window.addEventListener('scroll', () => {
-      const topContainer = document.querySelector('.top-container');
-      if (window.scrollY > 60) {
-        topContainer.classList.add('shrink');
+    // Header shrink on scroll
+    window.addEventListener("scroll", () => {
+      const topContainer = document.querySelector(".top-container");
+      if (window.scrollY > 50) {
+        topContainer.classList.add("shrink");
       } else {
-        topContainer.classList.remove('shrink');
+        topContainer.classList.remove("shrink");
       }
     });
   </script>
@@ -403,16 +389,16 @@
       </div>
     </header>
 
-    <div class="toolbar">
-      <button onclick="scrollToCategory('Glass Plate')">Glass Plate</button>
-      <button onclick="scrollToCategory('Travel Plate')">Travel Plate</button>
-      <button onclick="scrollToCategory('½ kilo')">½ kilo</button>
-      <button onclick="scrollToCategory('Kilo')">Kilo</button>
-      <button onclick="scrollToCategory('¼ Kilo')">¼ Kilo</button>
-      <button onclick="scrollToCategory('Drinks')">Drinks</button>
-      <button onclick="toggleCurrency()" id="currency-btn">Show in USD</button>
-      <button onclick="scrollToCategory('contact')">Contact Us</button>
-      <button onclick="window.location.href='arabic.html'">عربي</button>
+    <div class="toolbar" role="toolbar" aria-label="Menu navigation">
+      <button onclick="scrollToCategory('Glass Plate')" type="button">Glass Plate</button>
+      <button onclick="scrollToCategory('Travel Plate')" type="button">Travel Plate</button>
+      <button onclick="scrollToCategory('½ kilo')" type="button">Half Kilo</button>
+      <button onclick="scrollToCategory('Kilo')" type="button">Kilo</button>
+      <button onclick="scrollToCategory('¼ Kilo')" type="button">¼ Kilo</button>
+      <button onclick="scrollToCategory('Drinks')" type="button">Drinks</button>
+      <button onclick="toggleCurrency()" id="currency-btn" type="button">Show in LBP</button>
+      <button onclick="scrollToCategory('contact')" type="button">Contact Us</button>
+      <button onclick="window.location.href='arabic.html'" type="button">عربي</button>
     </div>
   </div>
 
@@ -420,18 +406,18 @@
 
   <div id="contact" class="contact-section">
     <h3>Contact Us</h3>
-    <div class="contact-links">
-      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C;">
+    <div class="contact-icons">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" >
         <i class="fab fa-instagram instagram-icon"></i>
-        <span>Instagram</span>
+        <span class="instagram-text">Instagram</span>
       </a>
-      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
-        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
-        <span>WhatsApp</span>
+      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" >
+        <i class="fab fa-whatsapp whatsapp-icon"></i>
+        <span class="whatsapp-text">WhatsApp</span>
       </a>
-      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black;">
-        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
-        <span>TikTok</span>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" aria-label="TikTok" >
+        <i class="fab fa-tiktok tiktok-icon"></i>
+        <span class="tiktok-text">TikTok</span>
       </a>
     </div>
   </div>
