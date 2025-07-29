@@ -6,7 +6,7 @@
   <title>مطعم الجود - القائمة</title>
   <style>
     html {
-      scroll-padding-top: 160px; /* for sticky header */
+      scroll-padding-top: 160px; 
     }
 
     body {
@@ -36,7 +36,7 @@
 
     .header-left {
       flex: 0 0 auto;
-      order: 2; /* Logo on the right in RTL */
+      order: 2; 
     }
 
     .header-right {
@@ -67,7 +67,6 @@
         text-align: center;
       }
 
-      /* Logo ahead of title on mobile */
       .header-left {
         order: 0;
         margin-bottom: 10px;
@@ -82,11 +81,10 @@
         min-height: 50px;
       }
 
-      /* Toolbar adjustments for mobile: horizontal scrolling with scrollbar */
       .toolbar {
         flex-wrap: nowrap !important;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        -webkit-overflow-scrolling: touch; 
         justify-content: flex-start !important;
         scrollbar-width: thin;
         scrollbar-color: #b30000 #f1f1f1;
@@ -161,14 +159,19 @@
       font-size: 20px;
     }
 
+    /* Fix for long phrases to wrap nicely on mobile */
+    .menu-item span:first-child {
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
     .contact-section {
       text-align: center;
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
     }
-
-    /* Font Awesome social icon styles are inline */
   </style>
 
   <!-- Font Awesome CDN for social icons -->
@@ -188,8 +191,8 @@
         ["حب بحامض", 150000],
         ["حب بطحينة", 150000],
         ["حمص مدقوق", 150000],
-        ["حمص مدقوق مع نص اوقية لحمة", 280000],
-        ["حمص مدقوق مع اوقية لحمة", 380000],
+        ["حمص مدقوق مع<wbr> نص اوقية لحمة", 280000],
+        ["حمص مدقوق مع<wbr> اوقية لحمة", 380000],
         ["فتة", 180000],
         ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
@@ -201,19 +204,12 @@
         ["حب بحامض", 200000],
         ["حب بطحينة", 200000],
         ["حمص مدقوق", 200000],
-        ["حمص مدقوق مع نص اوقية لحمة", 320000],
-        ["حمص مدقوق مع اوقية لحمة", 420000],
+        ["حمص مدقوق مع<wbr> نص اوقية لحمة", 320000],
+        ["حمص مدقوق مع<wbr> اوقية لحمة", 420000],
         ["فتة", 220000],
         ["ماليزية", 220000],
         ["بيض", 220000],
         ["لبنة مع سرفيس", 150000]
-      ],
-      "ربع كيلو": [
-        ["فول بحامض", 80000],
-        ["فول بطحينة", 80000],
-        ["حب بحامض", 80000],
-        ["حب بطحينة", 80000],
-        ["حمص مدقوق", 80000]
       ],
       "نص كيلو": [
         ["فول بحامض", 130000],
@@ -229,18 +225,22 @@
         ["حب بطحينة", 260000],
         ["حمص مدقوق", 260000]
       ],
+      "ربع كيلو": [
+        ["فول بحامض", 80000],
+        ["فول بطحينة", 80000],
+        ["حب بحامض", 80000],
+        ["حب بطحينة", 80000],
+        ["حمص مدقوق", 80000]
+      ],
       "مرطبات": [
         ["مياه كبير", 40000],
         ["مياه صغير", 20000],
         ["شاي زجاج", 30000],
         ["شاي كرتون", 50000],
-        ["بيبسي زجاج", 30000],
-        ["سفن اب زجاج", 30000],
-        ["ماريندا زجاج", 30000]
+        ["مشروبات غازية زجاج", 30000]
       ]
     };
 
-    // Convert to Arabic numerals and format
     function toArabicDigits(number) {
       return number.toString().replace(/[0-9]/g, d =>
         String.fromCharCode(d.charCodeAt(0) + 0x0660 - 0x0030)).replace(/,/g, '٬');
@@ -272,7 +272,6 @@
       renderMenu();
     }
 
-    // Smooth scroll adjustment to show h2 fully below sticky header
     function scrollToCategory(id) {
       const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
@@ -292,16 +291,15 @@
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
-        <!-- Phone number removed as requested -->
       </div>
     </header>
 
     <div class="toolbar">
       <button onclick="scrollToCategory('صحن زجاج')">صحن زجاج</button>
       <button onclick="scrollToCategory('صحن سفري')">صحن سفري</button>
-      <button onclick="scrollToCategory('ربع كيلو')">ربع كيلو</button>
       <button onclick="scrollToCategory('نص كيلو')">نص كيلو</button>
       <button onclick="scrollToCategory('كيلو')">كيلو</button>
+      <button onclick="scrollToCategory('ربع كيلو')">ربع كيلو</button>
       <button onclick="scrollToCategory('مرطبات')">مرطبات</button>
       <button onclick="toggleCurrency()" id="currency-btn">عرض بالدولار</button>
       <button onclick="scrollToCategory('contact')">تواصل معنا</button>
