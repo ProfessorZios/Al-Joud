@@ -1,173 +1,350 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قائمة مطعم الجود</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مطعم الجود - القائمة</title>
   <style>
     html {
-      scroll-padding-top: 120px;
+      scroll-padding-top: 160px; /* for sticky header */
     }
 
     body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #fefefe;
-      color: #000;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .top-container {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #b30000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     header {
-      position: sticky;
-      top: 0;
-      background-color: red;
-      color: white;
-      padding: 15px 10px;
-      z-index: 1000;
-      transition: padding 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        padding: 8px 10px;
-      }
-
-      .footer-icons {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .footer-icons .top-row {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-
-      .footer-icons .bottom-row {
-        display: flex;
-        justify-content: center;
-      }
-    }
-
-    nav {
       display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      background-color: red;
-    }
-
-    nav button {
-      background: none;
-      border: none;
+      align-items: center;
+      justify-content: space-between;
       color: white;
-      font-size: 16px;
-      padding: 10px;
-      cursor: pointer;
+      padding: 10px 20px;
+      flex-wrap: wrap;
     }
 
-    h2 {
-      padding-top: 50px;
-      margin-top: -50px;
+    .header-left {
+      flex: 0 0 auto;
+      order: 2; /* Logo on the right in RTL */
     }
 
-    footer {
-      background-color: #fff;
+    .header-right {
+      flex: 1;
       text-align: center;
-      padding: 20px;
-    }
-
-    footer h3 {
-      color: #000;
-    }
-
-    .footer-icons {
+      order: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      margin-top: 10px;
-    }
-
-    .footer-icons img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .footer-icons .top-row {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .footer-icons .bottom-row {
-      display: flex;
       justify-content: center;
     }
 
-    .instagram-icon {
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .logo {
+      height: 10vw;
+      max-height: 140px;
+      min-height: 60px;
+      object-fit: contain;
+      background-color: white;
+      padding: 5px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+      display: block;
+      transition: height 0.3s ease;
     }
 
-    section {
-      padding: 10px 20px;
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      /* Logo ahead of title on mobile */
+      .header-left {
+        order: 0;
+        margin-bottom: 10px;
+      }
+
+      .header-right {
+        order: 1;
+      }
+
+      .logo {
+        height: 8vw; /* smaller on mobile */
+        min-height: 40px;
+      }
+
+      /* Toolbar adjustments for mobile: horizontal scrolling with scrollbar */
+      .toolbar {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        justify-content: flex-start !important;
+        scrollbar-width: thin;
+        scrollbar-color: #b30000 #f1f1f1;
+      }
+      /* Force scrollbar visible on mobile */
+      .toolbar::-webkit-scrollbar {
+        height: 8px;
+      }
+      .toolbar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .toolbar::-webkit-scrollbar-thumb {
+        background-color: #b30000;
+        border-radius: 4px;
+      }
+
+      .toolbar button {
+        flex-grow: 0 !important;
+        min-width: 120px;
+        white-space: nowrap;
+      }
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 4px;
     }
 
-    li {
-      margin-bottom: 10px;
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .toolbar button {
+      background: white;
+      color: #b30000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 120px;
+      flex-grow: 1;
+      white-space: nowrap;
+    }
+
+    .menu-section {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .menu-section h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      scroll-margin-top: 160px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 20px;
+    }
+
+    .contact-section {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+
+    /* Responsive footer icons layout */
+    @media (max-width: 600px) {
+      .contact-section div {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .contact-section div > a:nth-child(1),
+      .contact-section div > a:nth-child(2) {
+        flex: 1 1 45%;
+        max-width: 45%;
+      }
+      .contact-section div > a:nth-child(3) {
+        flex: 1 1 100%;
+        max-width: 100%;
+        margin-top: 15px;
+        justify-content: center !important;
+      }
     }
   </style>
+
+  <!-- Font Awesome CDN for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <script>
+    const exchangeRate = 89500;
+    let showUSD = false;
+
+    const menuData = {
+      "صحن زجاج": [
+        ["فول بحامض", 150000],
+        ["فول بطحينة", 150000],
+        ["حب بحامض", 150000],
+        ["حب بطحينة", 150000],
+        ["حمص مدقوق", 150000],
+        ["حمص مدقوق <br> نص أوقية لحمة", 280000],
+        ["حمص مدقوق <br> أوقية لحمة", 380000],
+        ["فتة", 180000],
+        ["ماليزية", 180000],
+        ["لبنة مع سرفيس", 150000],
+        ["بيض", 180000]
+      ],
+      "صحن سفري": [
+        ["فول بحامض", 200000],
+        ["فول بطحينة", 200000],
+        ["حب بحامض", 200000],
+        ["حب بطحينة", 200000],
+        ["حمص مدقوق", 200000],
+        ["حمص مدقوق <br> نص أوقية لحمة", 320000],
+        ["حمص مدقوق <br> أوقية لحمة", 420000],
+        ["فتة", 220000],
+        ["ماليزية", 220000],
+        ["بيض", 220000],
+        ["لبنة مع سرفيس", 150000]
+      ],
+      "ربع كيلو": [
+        ["فول بحامض", 80000],
+        ["فول بطحينة", 80000],
+        ["حب بحامض", 80000],
+        ["حب بطحينة", 80000],
+        ["حمص مدقوق", 80000]
+      ],
+      "نص كيلو": [
+        ["فول بحامض", 130000],
+        ["فول بطحينة", 130000],
+        ["حب بحامض", 130000],
+        ["حب بطحينة", 130000],
+        ["حمص مدقوق", 130000]
+      ],
+      "كيلو": [
+        ["فول بحامض", 260000],
+        ["فول بطحينة", 260000],
+        ["حب بحامض", 260000],
+        ["حب بطحينة", 260000],
+        ["حمص مدقوق", 260000]
+      ],
+      "مرطبات": [
+        ["مياه كبير", 40000],
+        ["مياه صغير", 20000],
+        ["شاي زجاج", 30000],
+        ["شاي كرتون", 50000],
+        ["بيبسي زجاج", 30000],
+        ["سفن اب زجاج", 30000],
+        ["ماريندا زجاج", 30000]
+      ]
+    };
+
+    // Convert to Arabic numerals and format
+    function toArabicDigits(number) {
+      return number.toString().replace(/[0-9]/g, d =>
+        String.fromCharCode(d.charCodeAt(0) + 0x0660 - 0x0030)).replace(/,/g, '٬');
+    }
+
+    function renderMenu() {
+      const container = document.getElementById("menu-container");
+      container.innerHTML = "";
+      for (const [section, items] of Object.entries(menuData)) {
+        const sectionTitle = document.createElement("h2");
+        sectionTitle.id = section;
+        sectionTitle.textContent = section;
+        container.appendChild(sectionTitle);
+        items.forEach(([name, price]) => {
+          const div = document.createElement("div");
+          div.className = "menu-item";
+          const priceText = showUSD
+            ? `${toArabicDigits((price / exchangeRate).toFixed(2))} $`
+            : `${toArabicDigits(price.toLocaleString())} ل.ل.`;
+          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
+          container.appendChild(div);
+        });
+      }
+      document.getElementById("currency-btn").textContent = showUSD ? "عرض بالليرة" : "عرض بالدولار";
+    }
+
+    function toggleCurrency() {
+      showUSD = !showUSD;
+      renderMenu();
+    }
+
+    // Smooth scroll adjustment to show h2 fully below sticky header
+    function scrollToCategory(id) {
+      const headerHeight = document.querySelector('.top-container').offsetHeight;
+      const element = document.getElementById(id);
+      if (!element) return;
+      const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementTop - headerHeight,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </head>
-<body>
+<body onload="renderMenu()">
+  <div class="top-container">
+    <header>
+      <div class="header-left">
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo">
+      </div>
+      <div class="header-right">
+        <div class="title">مطعم الجود</div>
+        <!-- Phone number removed as requested -->
+      </div>
+    </header>
 
-<header>
-  <h1>قائمة الطعام</h1>
-</header>
-
-<nav>
-  <button onclick="document.getElementById('section1').scrollIntoView()">المقبلات</button>
-  <button onclick="document.getElementById('section2').scrollIntoView()">الأطباق الرئيسية</button>
-</nav>
-
-<section id="section1">
-  <h2>المقبلات</h2>
-  <ul>
-    <li>حمص مدقوق<br>نص أوقية لحمة</li>
-    <li>بابا غنوج</li>
-  </ul>
-</section>
-
-<section id="section2">
-  <h2>الأطباق الرئيسية</h2>
-  <ul>
-    <li>كباب</li>
-    <li>مشاوي</li>
-  </ul>
-</section>
-
-<footer>
-  <h3>ابقَ على تواصل معنا</h3>
-  <div class="footer-icons">
-    <div class="top-row">
-      <a href="https://www.instagram.com" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-      </a>
-      <a href="https://wa.me/96123456789" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-      </a>
+    <div class="toolbar">
+      <button onclick="scrollToCategory('صحن زجاج')">صحن زجاج</button>
+      <button onclick="scrollToCategory('صحن سفري')">صحن سفري</button>
+      <button onclick="scrollToCategory('ربع كيلو')">ربع كيلو</button>
+      <button onclick="scrollToCategory('نص كيلو')">نص كيلو</button>
+      <button onclick="scrollToCategory('كيلو')">كيلو</button>
+      <button onclick="scrollToCategory('مرطبات')">مرطبات</button>
+      <button onclick="toggleCurrency()" id="currency-btn">عرض بالدولار</button>
+      <button onclick="scrollToCategory('contact')">ابقَ على تواصل معنا</button>
+      <button onclick="window.location.href='english.html'">English</button>
     </div>
-    <div class="bottom-row">
-      <a href="https://www.tiktok.com" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/0a/TikTok_logo.svg" alt="TikTok">
+  </div>
+
+  <div id="menu-container" class="menu-section"></div>
+
+  <div id="contact" class="contact-section">
+    <h3>ابقَ على تواصل معنا</h3>
+    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center; flex-wrap: wrap;">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram" style="font-size: 28px;"></i>
+        <span>إنستغرام</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+        <span>واتساب</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+        <span>تيك توك</span>
       </a>
     </div>
   </div>
-</footer>
-
 </body>
 </html>
