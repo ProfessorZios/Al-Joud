@@ -158,7 +158,6 @@
       font-size: 20px;
     }
 
-    /* Fix long menu names for mobile */
     .menu-item span:first-child {
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -172,29 +171,17 @@
       border-top: 1px solid #ddd;
     }
 
-    /* Fix footer icons so they don't get cut off or overflow */
-    .contact-section div {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      font-size: 20px;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 0 10px;
-    }
-
-    .contact-section a {
-      color: inherit;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      min-width: 110px;
-      box-sizing: border-box;
+    /* Instagram multicolor gradient for icon */
+    .instagram-icon {
+      font-size: 28px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, 
+                  #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   </style>
 
+  <!-- Font Awesome CDN for social icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -205,22 +192,52 @@
     let showUSD = false;
 
     const menuData = {
-      "Takeaway Plate": [
+      "Glass Plate": [
+        ["Foul with Lemon", 150000],
+        ["Foul with Tahini", 150000],
+        ["Habb with Lemon", 150000],
+        ["Habb with Tahini", 150000],
+        ["Mashed Hummus", 150000],
+        ["Mashed Hummus with<wbr> ½ oz Meat", 280000],
+        ["Mashed Hummus with<wbr> 1 oz Meat", 380000],
+        ["Fatteh", 180000],
+        ["Malaysian", 180000],
+        ["Labneh with Service", 150000],
+        ["Eggs", 180000]
+      ],
+      "Travel Plate": [
         ["Foul with Lemon", 200000],
         ["Foul with Tahini", 200000],
-        ["Habb with Lemon", 200000]
-      ],
-      "Quarter Kilo": [
-        ["Foul with Lemon", 80000],
-        ["Foul with Tahini", 80000]
+        ["Habb with Lemon", 200000],
+        ["Habb with Tahini", 200000],
+        ["Mashed Hummus", 200000],
+        ["Mashed Hummus with<wbr> ½ oz Meat", 320000],
+        ["Mashed Hummus with<wbr> 1 oz Meat", 420000],
+        ["Fatteh", 220000],
+        ["Malaysian", 220000],
+        ["Eggs", 220000],
+        ["Labneh with Service", 150000]
       ],
       "Half Kilo": [
         ["Foul with Lemon", 130000],
-        ["Foul with Tahini", 130000]
+        ["Foul with Tahini", 130000],
+        ["Habb with Lemon", 130000],
+        ["Habb with Tahini", 130000],
+        ["Mashed Hummus", 130000]
       ],
       "Kilo": [
         ["Foul with Lemon", 260000],
-        ["Foul with Tahini", 260000]
+        ["Foul with Tahini", 260000],
+        ["Habb with Lemon", 260000],
+        ["Habb with Tahini", 260000],
+        ["Mashed Hummus", 260000]
+      ],
+      "Quarter Kilo": [
+        ["Foul with Lemon", 80000],
+        ["Foul with Tahini", 80000],
+        ["Habb with Lemon", 80000],
+        ["Habb with Tahini", 80000],
+        ["Mashed Hummus", 80000]
       ],
       "Drinks": [
         ["Large Water", 40000],
@@ -230,11 +247,6 @@
         ["Glass Soft Drinks", 30000]
       ]
     };
-
-    // Example: inserting <wbr> to "1 oz meat" phrase for better wrapping:
-    // You can add more <wbr> in long names as needed.
-    // For demonstration, let's assume "1 oz meat" is displayed as "1<wbr> oz<wbr> meat"
-    // But since your menu items don’t include that exact phrase, adjust as needed.
 
     function toArabicDigits(number) {
       return number.toString().replace(/[0-9]/g, d =>
@@ -246,22 +258,20 @@
       container.innerHTML = "";
       for (const [section, items] of Object.entries(menuData)) {
         const sectionTitle = document.createElement("h2");
-        sectionTitle.id = section.replace(/\s+/g, '-');
+        sectionTitle.id = section;
         sectionTitle.textContent = section;
         container.appendChild(sectionTitle);
         items.forEach(([name, price]) => {
           const div = document.createElement("div");
           div.className = "menu-item";
           const priceText = showUSD
-            ? `$${(price / exchangeRate).toFixed(2)}`
-            : price.toLocaleString() + " L.L.";
-          // For long names that might break better, you can insert <wbr> manually:
-          // Example: name = name.replace("1 oz meat", "1<wbr> oz<wbr> meat");
+            ? `${(price / exchangeRate).toFixed(2)} $`
+            : `${price.toLocaleString()} LBP`;
           div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
           container.appendChild(div);
         });
       }
-      document.getElementById("currency-btn").textContent = showUSD ? "Show L.L." : "Show $";
+      document.getElementById("currency-btn").textContent = showUSD ? "Show in LBP" : "Show in USD";
     }
 
     function toggleCurrency() {
@@ -271,8 +281,7 @@
 
     function scrollToCategory(id) {
       const headerHeight = document.querySelector('.top-container').offsetHeight;
-      const element = document.getElementById(id.replace(/\s+/g, '-'));
-      if (!element) return;
+      const element = document.getElementById(id);
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementTop - headerHeight,
@@ -293,14 +302,15 @@
     </header>
 
     <div class="toolbar">
-      <button onclick="scrollToCategory('Takeaway Plate')">Takeaway Plate</button>
-      <button onclick="scrollToCategory('Quarter Kilo')">Quarter Kilo</button>
+      <button onclick="scrollToCategory('Glass Plate')">Glass Plate</button>
+      <button onclick="scrollToCategory('Travel Plate')">Travel Plate</button>
       <button onclick="scrollToCategory('Half Kilo')">Half Kilo</button>
       <button onclick="scrollToCategory('Kilo')">Kilo</button>
+      <button onclick="scrollToCategory('Quarter Kilo')">Quarter Kilo</button>
       <button onclick="scrollToCategory('Drinks')">Drinks</button>
-      <button onclick="toggleCurrency()" id="currency-btn">Show $</button>
+      <button onclick="toggleCurrency()" id="currency-btn">Show in USD</button>
       <button onclick="scrollToCategory('contact')">Contact Us</button>
-      <button onclick="window.location.href='arabic.html'">العربية</button>
+      <button onclick="window.location.href='arabic.html'">عربي</button>
     </div>
   </div>
 
@@ -308,16 +318,16 @@
 
   <div id="contact" class="contact-section">
     <h3>Contact Us</h3>
-    <div>
-      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000;">
-        <i class="fab fa-instagram" style="font-size: 28px;"></i>
-        <span>Instagram</span>
+    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram instagram-icon"></i>
+        <span style="color: #E1306C;">Instagram</span>
       </a>
-      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
+      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
         <span>WhatsApp</span>
       </a>
-      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black;">
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-tiktok" style="font-size: 28px;"></i>
         <span>TikTok</span>
       </a>
