@@ -89,7 +89,6 @@
         scrollbar-width: thin;
         scrollbar-color: #b30000 #f1f1f1;
       }
-      /* Force scrollbar visible on mobile */
       .toolbar::-webkit-scrollbar {
         height: 8px;
       }
@@ -159,7 +158,6 @@
       font-size: 20px;
     }
 
-    /* Fix for long phrases to wrap nicely on mobile */
     .menu-item span:first-child {
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -171,6 +169,15 @@
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
+    }
+
+    /* Instagram multicolor gradient for icon */
+    .instagram-icon {
+      font-size: 28px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, 
+                  #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   </style>
 
@@ -191,8 +198,8 @@
         ["حب بحامض", 150000],
         ["حب بطحينة", 150000],
         ["حمص مدقوق", 150000],
-        ["حمص مدقوق<br>نص أوقية لحمة", 280000],
-        ["حمص مدقوق<br>أوقية لحمة", 380000],
+        ["حمص مدقوق مع<wbr> نص اوقية لحمة", 280000],
+        ["حمص مدقوق مع<wbr> اوقية لحمة", 380000],
         ["فتة", 180000],
         ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
@@ -204,8 +211,8 @@
         ["حب بحامض", 200000],
         ["حب بطحينة", 200000],
         ["حمص مدقوق", 200000],
-        ["حمص مدقوق<br>نص أوقية لحمة", 320000],
-        ["حمص مدقوق<br>أوقية لحمة", 420000],
+        ["حمص مدقوق مع<wbr> نص اوقية لحمة", 320000],
+        ["حمص مدقوق مع<wbr> اوقية لحمة", 420000],
         ["فتة", 220000],
         ["ماليزية", 220000],
         ["بيض", 220000],
@@ -287,7 +294,7 @@
   <div class="top-container">
     <header>
       <div class="header-left">
-        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo">
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo" />
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
@@ -312,9 +319,9 @@
   <div id="contact" class="contact-section">
     <h3>تواصل معنا</h3>
     <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
-      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-        <i class="fab fa-instagram" style="font-size: 28px;"></i>
-        <span>إنستغرام</span>
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram instagram-icon"></i>
+        <span style="color: #E1306C;">إنستغرام</span>
       </a>
       <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
