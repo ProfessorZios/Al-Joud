@@ -23,6 +23,15 @@
       z-index: 1000;
       background-color: #b30000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: height 0.3s ease, padding 0.3s ease;
+      padding: 10px 0;
+      height: 110px;
+      overflow: visible;
+    }
+
+    .top-container.shrink {
+      height: 70px;
+      padding: 5px 0;
     }
 
     header {
@@ -30,8 +39,9 @@
       align-items: center;
       justify-content: space-between;
       color: white;
-      padding: 10px 20px;
+      padding: 0 20px;
       flex-wrap: wrap;
+      transition: padding 0.3s ease;
     }
 
     .header-left {
@@ -61,62 +71,40 @@
       transition: height 0.3s ease;
     }
 
+    .top-container.shrink .logo {
+      height: 6vw;
+      min-height: 40px;
+    }
+
     @media (max-width: 600px) {
       header {
-        flex-direction: column !important;
-        padding: 8px 10px !important;
+        flex-direction: column;
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .header-left {
+        order: 0;
+        margin-bottom: 8px;
+      }
+
+      .header-right {
+        order: 1;
       }
 
       .logo {
-        height: 60px !important;
-        min-height: 50px !important;
-        margin: 0 auto 8px auto !important;
+        height: 12vw;
+        min-height: 50px;
       }
 
-      .header-right .title {
-        font-size: 20px !important;
-        margin-bottom: 8px !important;
-        text-align: center !important;
+      .top-container.shrink {
+        height: 60px;
+        padding: 3px 0;
       }
 
-      .toolbar {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        justify-content: flex-start !important;
-        padding: 8px 10px !important;
-        scrollbar-width: thin;
-        scrollbar-color: #b30000 #f1f1f1;
-      }
-      .toolbar::-webkit-scrollbar {
-        height: 8px;
-      }
-      .toolbar::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      .toolbar::-webkit-scrollbar-thumb {
-        background-color: #b30000;
-        border-radius: 4px;
-      }
-
-      .toolbar button {
-        flex-grow: 0 !important;
-        min-width: 90px !important;
-        white-space: nowrap;
-        padding: 8px 12px !important;
-        font-size: 14px !important;
-      }
-
-      .contact-section {
-        flex-direction: column !important;
-        padding: 20px 10px !important;
-        font-size: 18px !important;
-        gap: 15px !important;
-      }
-
-      .contact-section a {
-        min-width: auto !important;
-        font-size: 20px !important;
+      .top-container.shrink .logo {
+        height: 8vw;
+        min-height: 30px;
       }
     }
 
@@ -124,14 +112,37 @@
       font-size: 26px;
       font-weight: bold;
       margin-bottom: 4px;
+      transition: font-size 0.3s ease;
+    }
+
+    .top-container.shrink .title {
+      font-size: 20px;
     }
 
     .toolbar {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
       gap: 10px;
       padding: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #b30000 #f1f1f1;
+      background-color: white;
+    }
+
+    .toolbar::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .toolbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .toolbar::-webkit-scrollbar-thumb {
+      background-color: #b30000;
+      border-radius: 4px;
     }
 
     .toolbar button {
@@ -143,20 +154,20 @@
       cursor: pointer;
       font-weight: bold;
       min-width: 120px;
-      flex-grow: 1;
+      flex-shrink: 0;
       white-space: nowrap;
-      transition: background-color 0.3s;
+      transition: background-color 0.2s ease;
     }
 
     .toolbar button:hover {
-      background-color: #e60000;
-      color: white;
+      background-color: #f4d6d6;
     }
 
     .menu-section {
       max-width: 800px;
       margin: 20px auto;
       padding: 0 15px;
+      text-align: right;
     }
 
     .menu-section h2 {
@@ -181,6 +192,7 @@
       word-break: break-word;
       overflow-wrap: anywhere;
       white-space: normal;
+      text-align: right;
     }
 
     .contact-section {
@@ -188,35 +200,67 @@
       padding: 40px 20px;
       background-color: #f9f9f9;
       border-top: 1px solid #ddd;
+      max-width: 800px;
+      margin: 40px auto 20px auto;
+    }
+
+    /* Social icons 2-1 layout */
+    .contact-icons {
       display: flex;
       justify-content: center;
       gap: 40px;
-      font-size: 20px;
-      align-items: center;
       flex-wrap: wrap;
+      max-width: 300px;
+      margin: 0 auto;
     }
-
-    .contact-section a {
-      color: inherit;
-      text-decoration: none;
+    .contact-icons a {
       display: flex;
       align-items: center;
       gap: 8px;
-      min-width: 120px;
-      justify-content: center;
-      flex-shrink: 0;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
     }
 
-    /* Instagram multicolor gradient for icon */
+    /* Official brand colors */
     .instagram-icon {
       font-size: 28px;
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, 
-                  #d6249f 60%, #285AEB 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #E1306C;
+    }
+    .instagram-text {
+      color: #E1306C;
+    }
+
+    .whatsapp-icon {
+      font-size: 28px;
+      color: #25D366;
+    }
+    .whatsapp-text {
+      color: #25D366;
+    }
+
+    .tiktok-icon {
+      font-size: 28px;
+      color: black;
+    }
+    .tiktok-text {
+      color: black;
+    }
+
+    @media (max-width: 600px) {
+      .contact-icons {
+        max-width: 100%;
+        justify-content: space-around;
+      }
+      .contact-icons a {
+        font-size: 18px;
+        flex: 1 1 40%;
+        justify-content: center;
+      }
     }
   </style>
 
+  <!-- Font Awesome CDN for social icons -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -224,7 +268,7 @@
 
   <script>
     const exchangeRate = 89500;
-    let showUSD = false; // Default to LBP on Arabic page
+    let showUSD = false; // Arabic page default LBP
 
     const menuData = {
       "طبق زجاج": [
@@ -233,23 +277,23 @@
         ["حب بالليمون", 150000],
         ["حب بالطحينة", 150000],
         ["حمص مهروس", 150000],
-        ["حمص مهروس مع ½ أوقية لحمة", 280000],
-        ["حمص مهروس مع 1 أوقية لحمة", 380000],
+        ["حمص مهروس <br>½ أوقية لحمة", 280000],
+        ["حمص مهروس <br>1 أوقية لحمة", 380000],
         ["فتة", 180000],
-        ["مالايزي", 180000],
+        ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
         ["بيض", 180000]
       ],
-      "طبق السفر": [
+      "طبق سفر": [
         ["فول بالليمون", 200000],
         ["فول بالطحينة", 200000],
         ["حب بالليمون", 200000],
         ["حب بالطحينة", 200000],
         ["حمص مهروس", 200000],
-        ["حمص مهروس مع ½ أوقية لحمة", 320000],
-        ["حمص مهروس مع 1 أوقية لحمة", 420000],
+        ["حمص مهروس <br>½ أوقية لحمة", 320000],
+        ["حمص مهروس <br>1 أوقية لحمة", 420000],
         ["فتة", 220000],
-        ["مالايزي", 220000],
+        ["ماليزية", 220000],
         ["بيض", 220000],
         ["لبنة مع سرفيس", 150000]
       ],
@@ -279,7 +323,7 @@
         ["مياه صغير", 20000],
         ["شاي زجاج", 30000],
         ["شاي كرتون", 50000],
-        ["بيبسي زجاج", 30000]
+        ["مشروبات زجاج", 30000]
       ]
     };
 
@@ -301,12 +345,12 @@
           div.className = "menu-item";
           const priceText = showUSD
             ? `${(price / exchangeRate).toFixed(2)} $`
-            : toArabicDigits(price) + " ل.ل";
+            : toArabicDigits(price) + " ل.ل.";
           div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
           container.appendChild(div);
         });
       }
-      document.getElementById("currency-btn").textContent = showUSD ? "عرض بالليرة" : "Show in USD";
+      document.getElementById("currency-btn").textContent = showUSD ? "اظهر بالليرة" : "اظهر بالدولار";
     }
 
     function toggleCurrency() {
@@ -317,12 +361,23 @@
     function scrollToCategory(id) {
       const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
+      if (!element) return;
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementTop - headerHeight,
         behavior: 'smooth'
       });
     }
+
+    // Header shrink on scroll
+    window.addEventListener("scroll", () => {
+      const topContainer = document.querySelector(".top-container");
+      if (window.scrollY > 50) {
+        topContainer.classList.add("shrink");
+      } else {
+        topContainer.classList.remove("shrink");
+      }
+    });
   </script>
 </head>
 <body onload="renderMenu()">
@@ -336,31 +391,37 @@
       </div>
     </header>
 
-    <div class="toolbar">
-      <button onclick="scrollToCategory('طبق زجاج')">طبق زجاج</button>
-      <button onclick="scrollToCategory('طبق السفر')">طبق السفر</button>
-      <button onclick="scrollToCategory('½ كيلو')">½ كيلو</button>
-      <button onclick="scrollToCategory('كيلو')">كيلو</button>
-      <button onclick="scrollToCategory('¼ كيلو')">¼ كيلو</button>
-      <button onclick="scrollToCategory('مشروبات')">مشروبات</button>
-      <button onclick="toggleCurrency()" id="currency-btn">عرض بالليرة</button>
-      <button onclick="scrollToCategory('contact')">اتصل بنا</button>
-      <button onclick="window.location.href='english.html'">English</button>
+    <div class="toolbar" role="toolbar" aria-label="تنقل القائمة">
+      <button onclick="scrollToCategory('طبق زجاج')" type="button">طبق زجاج</button>
+      <button onclick="scrollToCategory('طبق سفر')" type="button">طبق سفر</button>
+      <button onclick="scrollToCategory('½ كيلو')" type="button">½ كيلو</button>
+      <button onclick="scrollToCategory('كيلو')" type="button">كيلو</button>
+      <button onclick="scrollToCategory('¼ كيلو')" type="button">¼ كيلو</button>
+      <button onclick="scrollToCategory('مشروبات')" type="button">مشروبات</button>
+      <button onclick="toggleCurrency()" id="currency-btn" type="button">اظهر بالدولار</button>
+      <button onclick="scrollToCategory('contact')" type="button">اتصل بنا</button>
+      <button onclick="window.location.href='english.html'" type="button">English</button>
     </div>
   </div>
 
   <div id="menu-container" class="menu-section"></div>
 
   <div id="contact" class="contact-section">
-    <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C;">
-      <i class="fab fa-instagram instagram-icon"></i> انستغرام
-    </a>
-    <a href="https://wa.me/96181276214?text=مرحبا! أود طلب الطعام، من فضلك 🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366;">
-      <i class="fab fa-whatsapp" style="font-size: 28px;"></i> واتساب
-    </a>
-    <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black;">
-      <i class="fab fa-tiktok" style="font-size: 28px;"></i> تيك توك
-    </a>
+    <h3>اتصل بنا</h3>
+    <div class="contact-icons">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام" >
+        <i class="fab fa-instagram instagram-icon"></i>
+        <span class="instagram-text">إنستغرام</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20طلب%20طلبية%20من%20فضلك%20🍽️" target="_blank" rel="noopener noreferrer" aria-label="واتساب" >
+        <i class="fab fa-whatsapp whatsapp-icon"></i>
+        <span class="whatsapp-text">واتساب</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" >
+        <i class="fab fa-tiktok tiktok-icon"></i>
+        <span class="tiktok-text">تيك توك</span>
+      </a>
+    </div>
   </div>
 </body>
 </html>
