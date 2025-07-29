@@ -89,7 +89,6 @@
         scrollbar-width: thin;
         scrollbar-color: #b30000 #f1f1f1;
       }
-      /* Force scrollbar visible on mobile */
       .toolbar::-webkit-scrollbar {
         height: 8px;
       }
@@ -189,8 +188,8 @@
         ["حب بحامض", 150000],
         ["حب بطحينة", 150000],
         ["حمص مدقوق", 150000],
-        ["حمص مدقوق مع<wbr> نص<wbr> اوقية<wbr> لحمة", 280000],
-        ["حمص مدقوق مع<wbr> اوقية<wbr> لحمة", 380000],
+        ["حمص مدقوق مع&#8203; نص&#8203; اوقية&#8203; لحمة", 280000],
+        ["حمص مدقوق مع&#8203; اوقية&#8203; لحمة", 380000],
         ["فتة", 180000],
         ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
@@ -202,8 +201,8 @@
         ["حب بحامض", 200000],
         ["حب بطحينة", 200000],
         ["حمص مدقوق", 200000],
-        ["حمص مدقوق مع<wbr> نص<wbr> اوقية<wbr> لحمة", 320000],
-        ["حمص مدقوق مع<wbr> اوقية<wbr> لحمة", 420000],
+        ["حمص مدقوق مع&#8203; نص&#8203; اوقية&#8203; لحمة", 320000],
+        ["حمص مدقوق مع&#8203; اوقية&#8203; لحمة", 420000],
         ["فتة", 220000],
         ["ماليزية", 220000],
         ["بيض", 220000],
@@ -258,7 +257,6 @@
           const priceText = showUSD
             ? `${toArabicDigits((price / exchangeRate).toFixed(2))} $`
             : `${toArabicDigits(price.toLocaleString())} ل.ل.`;
-          // Use innerHTML here to parse <wbr> tags inside names
           div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
           container.appendChild(div);
         });
@@ -286,7 +284,7 @@
   <div class="top-container">
     <header>
       <div class="header-left">
-        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo" />
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo">
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
@@ -311,30 +309,15 @@
   <div id="contact" class="contact-section">
     <h3>تواصل معنا</h3>
     <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
-      <a
-        href="https://www.instagram.com/al_jud_restaurant/"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;"
-      >
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-instagram" style="font-size: 28px;"></i>
         <span>إنستغرام</span>
       </a>
-      <a
-        href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;"
-      >
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
         <span>واتساب</span>
       </a>
-      <a
-        href="https://www.tiktok.com/@al_joud_restaurant"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;"
-      >
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
         <i class="fab fa-tiktok" style="font-size: 28px;"></i>
         <span>تيك توك</span>
       </a>
