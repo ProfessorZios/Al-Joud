@@ -23,17 +23,6 @@
       z-index: 1000;
       background-color: #b30000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: height 0.3s ease, padding 0.3s ease;
-      height: 160px;
-      padding: 10px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .top-container.minimized {
-      height: 60px;
-      padding: 5px 0;
     }
 
     header {
@@ -43,7 +32,6 @@
       color: white;
       padding: 10px 20px;
       flex-wrap: wrap;
-      transition: padding 0.3s ease;
     }
 
     .header-left {
@@ -74,22 +62,12 @@
     }
 
     @media (max-width: 600px) {
-      .top-container {
-        height: 120px;
-        padding: 5px 0;
-      }
-
-      .top-container.minimized {
-        height: 50px;
-        padding: 3px 0;
-      }
-
       header {
         flex-direction: column;
         text-align: center;
-        padding: 5px 10px;
       }
 
+      /* Logo ahead of title on mobile */
       .header-left {
         order: 0;
         margin-bottom: 10px;
@@ -100,23 +78,20 @@
       }
 
       .logo {
-        height: 40px !important;
-        min-height: 40px !important;
+        height: 12vw;
+        min-height: 50px;
       }
 
-      .title {
-        font-size: 18px !important;
-      }
-
+      /* Toolbar adjustments for mobile: horizontal scrolling with scrollbar */
       .toolbar {
         flex-wrap: nowrap !important;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
         justify-content: flex-start !important;
         scrollbar-width: thin;
         scrollbar-color: #b30000 #f1f1f1;
-        padding: 5px 8px !important;
       }
+      /* Force scrollbar visible on mobile */
       .toolbar::-webkit-scrollbar {
         height: 8px;
       }
@@ -130,10 +105,8 @@
 
       .toolbar button {
         flex-grow: 0 !important;
-        min-width: 80px !important;
+        min-width: 120px;
         white-space: nowrap;
-        padding: 6px 12px !important;
-        font-size: 14px !important;
       }
     }
 
@@ -149,7 +122,6 @@
       justify-content: center;
       gap: 10px;
       padding: 10px;
-      transition: padding 0.3s ease;
     }
 
     .toolbar button {
@@ -163,7 +135,6 @@
       min-width: 120px;
       flex-grow: 1;
       white-space: nowrap;
-      transition: padding 0.3s ease, font-size 0.3s ease;
     }
 
     .menu-section {
@@ -188,12 +159,6 @@
       padding: 10px 0;
       border-bottom: 1px solid #eee;
       font-size: 20px;
-      white-space: normal;
-    }
-
-    .menu-item span:first-child {
-      white-space: normal;
-      /* Handle multi-line name */
     }
 
     .contact-section {
@@ -203,38 +168,7 @@
       border-top: 1px solid #ddd;
     }
 
-    /* Social icons container */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      font-size: 20px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* On small screens, Instagram & WhatsApp side by side, TikTok centered below */
-    @media (max-width: 600px) {
-      .social-links {
-        flex-wrap: nowrap;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .social-row {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        width: 100%;
-      }
-      .social-row a {
-        flex: 1 1 auto;
-        justify-content: center;
-      }
-      .tiktok-center {
-        justify-content: center;
-        width: 100%;
-      }
-    }
+    /* Font Awesome social icon styles are inline */
   </style>
 
   <!-- Font Awesome CDN for social icons -->
@@ -253,8 +187,9 @@
         ["فول بطحينة", 150000],
         ["حب بحامض", 150000],
         ["حب بطحينة", 150000],
-        ["حمص مدقوق<br>نص أوقية لحمة", 280000],
-        ["حمص مدقوق<br>أوقية لحمة", 380000],
+        ["حمص مدقوق", 150000],
+        ["حمص مدقوق مع نص اوقية لحمة", 280000],
+        ["حمص مدقوق مع اوقية لحمة", 380000],
         ["فتة", 180000],
         ["ماليزية", 180000],
         ["لبنة مع سرفيس", 150000],
@@ -266,8 +201,8 @@
         ["حب بحامض", 200000],
         ["حب بطحينة", 200000],
         ["حمص مدقوق", 200000],
-        ["حمص مدقوق<br>نص أوقية لحمة", 320000],
-        ["حمص مدقوق<br>أوقية لحمة", 420000],
+        ["حمص مدقوق مع نص اوقية لحمة", 320000],
+        ["حمص مدقوق مع اوقية لحمة", 420000],
         ["فتة", 220000],
         ["ماليزية", 220000],
         ["بيض", 220000],
@@ -337,11 +272,8 @@
       renderMenu();
     }
 
+    // Smooth scroll adjustment to show h2 fully below sticky header
     function scrollToCategory(id) {
-      if (id === "top") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
       const headerHeight = document.querySelector('.top-container').offsetHeight;
       const element = document.getElementById(id);
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
@@ -350,44 +282,17 @@
         behavior: 'smooth'
       });
     }
-
-    // Minimize header on scroll down, restore on scroll up
-    let lastScrollY = window.pageYOffset;
-    let ticking = false;
-
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const topContainer = document.querySelector(".top-container");
-          const currentScrollY = window.pageYOffset;
-
-          if (currentScrollY > lastScrollY && currentScrollY > 50) {
-            // Scrolling down
-            topContainer.classList.add("minimized");
-          } else if (currentScrollY < lastScrollY) {
-            // Scrolling up
-            topContainer.classList.remove("minimized");
-          } else if (currentScrollY <= 50) {
-            // At top
-            topContainer.classList.remove("minimized");
-          }
-
-          lastScrollY = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
   </script>
 </head>
 <body onload="renderMenu()">
   <div class="top-container">
     <header>
       <div class="header-left">
-        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo" />
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo">
       </div>
       <div class="header-right">
         <div class="title">مطعم الجود</div>
+        <!-- Phone number removed as requested -->
       </div>
     </header>
 
@@ -407,24 +312,20 @@
   <div id="menu-container" class="menu-section"></div>
 
   <div id="contact" class="contact-section">
-    <h3>ابقَ على تواصل معنا</h3>
-    <div class="social-links">
-      <div class="social-row">
-        <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-          <i class="fab fa-instagram" style="font-size: 28px;"></i>
-          <span>إنستغرام</span>
-        </a>
-        <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-          <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
-          <span>واتساب</span>
-        </a>
-      </div>
-      <div class="social-row tiktok-center" style="margin-top: 10px;">
-        <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px; justify-content: center;">
-          <i class="fab fa-tiktok" style="font-size: 28px;"></i>
-          <span>تيك توك</span>
-        </a>
-      </div>
+    <h3>تواصل معنا</h3>
+    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center;">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #b30000; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram" style="font-size: 28px;"></i>
+        <span>إنستغرام</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=مرحباً!%20أود%20أن%20أطلب%20من%20فضلك%20🍽️%0AHello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+        <span>واتساب</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+        <span>تيك توك</span>
+      </a>
     </div>
   </div>
 </body>
