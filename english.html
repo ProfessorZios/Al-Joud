@@ -3,168 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Al Joud Restaurant - English Menu</title>
+  <title>Al Joud Restaurant - Menu</title>
   <style>
     html {
-      scroll-padding-top: 130px;
-      scroll-behavior: smooth;
+      scroll-padding-top: 160px; /* space for sticky header */
     }
+
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
       background-color: #fefefe;
+      margin: 0;
+      padding: 0;
+      color: #333;
     }
-    header {
+
+    .top-container {
       position: sticky;
       top: 0;
-      background-color: #c8102e;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
       z-index: 1000;
+      background-color: #b30000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
-    @media (max-width: 768px) {
-      header {
-        padding: 5px 0;
-      }
-      nav button {
-        font-size: 13px;
-        padding: 8px;
-      }
-    }
-    nav {
+
+    header {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #c8102e;
-    }
-    nav button {
-      background: white;
-      color: #c8102e;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    section {
-      padding: 20px;
-    }
-    h2 {
-      margin-top: 100px;
-      color: #c8102e;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      padding: 5px 0;
-    }
-    footer {
-      background-color: #f8f8f8;
-      color: #000;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    .footer-icons {
-      display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 20px;
+      justify-content: space-between;
+      color: white;
+      padding: 10px 20px;
       flex-wrap: wrap;
-      margin: 10px 0;
     }
-    .footer-icons a {
-      text-decoration: none;
-      font-size: 24px;
+
+    .header-left {
+      flex: 0 0 auto;
     }
-    .instagram {
-      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .whatsapp {
-      color: #25D366;
-    }
-    .tiktok {
-      color: #000;
-    }
-    .tiktok-container {
-      width: 100%;
+
+    .header-right {
+      flex: 1;
+      text-align: center;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      margin-top: 10px;
     }
-    @media (max-width: 768px) {
-      .footer-icons {
-        flex-direction: row;
+
+    .logo {
+      height: 10vw;
+      max-height: 140px;
+      min-height: 60px;
+      object-fit: contain;
+      background-color: white;
+      padding: 5px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+      display: block;
+      transition: height 0.3s ease;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo {
+        height: 8vw; /* smaller on mobile */
+        min-height: 40px;
+        margin-bottom: 10px;
+      }
+
+      .header-right {
+        margin-top: 10px;
+      }
+
+      /* Toolbar horizontal scroll on mobile */
+      .toolbar {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start !important;
+      }
+
+      .toolbar button {
+        flex-grow: 0 !important;
+        min-width: 120px;
+        white-space: nowrap;
+      }
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    /* Removed phone styles as phone no longer shows */
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .toolbar button {
+      background: white;
+      color: #b30000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      min-width: 120px;
+      flex-grow: 1;
+      white-space: nowrap;
+    }
+
+    .menu-section {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .menu-section h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      scroll-margin-top: 160px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 20px;
+    }
+
+    .contact-section {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #ddd;
+    }
+
+    /* Footer icons layout on small screen */
+    @media (max-width: 600px) {
+      .contact-section div {
+        flex-wrap: wrap;
         justify-content: center;
       }
-      .tiktok-container {
-        margin-top: 10px;
+      .contact-section div > a:nth-child(1),
+      .contact-section div > a:nth-child(2) {
+        flex: 1 1 45%;
+        max-width: 45%;
+      }
+      .contact-section div > a:nth-child(3) {
+        flex: 1 1 100%;
+        max-width: 100%;
+        margin-top: 15px;
+        justify-content: center !important;
       }
     }
   </style>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
   <script>
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const exchangeRate = 89500;
+    let showUSD = true;
+
+    const menuData = {
+      "Takeaway Plate": [
+        ["Foul with Lemon", 200000],
+        ["Foul with Tahini", 200000],
+        ["Habb with Lemon", 200000]
+      ],
+      "Quarter Kilo": [
+        ["Foul with Lemon", 80000],
+        ["Foul with Tahini", 80000],
+        ["Habb with Lemon", 80000]
+      ],
+      "Half Kilo": [
+        ["Foul with Lemon", 130000],
+        ["Foul with Tahini", 130000],
+        ["Habb with Lemon", 130000]
+      ],
+      "Kilo": [
+        ["Foul with Lemon", 260000],
+        ["Foul with Tahini", 260000],
+        ["Habb with Lemon", 260000]
+      ],
+      "Beverages": [
+        ["Large Water", 40000],
+        ["Small Water", 20000],
+        ["Glass Tea", 30000],
+        ["Carton Tea", 50000],
+        ["Pepsi Glass", 30000],
+        ["7Up Glass", 30000],
+        ["Mirinda Glass", 30000]
+      ],
+      "Mashed Hummus <br> ½ oz Meat": [
+        ["Mashed Hummus <br> ½ oz Meat", 280000]
+      ],
+      "Mashed Hummus <br> 1 oz Meat": [
+        ["Mashed Hummus <br> 1 oz Meat", 380000]
+      ]
+    };
+
+    function renderMenu() {
+      const container = document.getElementById("menu-container");
+      container.innerHTML = "";
+      for (const [section, items] of Object.entries(menuData)) {
+        const sectionTitle = document.createElement("h2");
+        sectionTitle.id = section.replace(/\s+/g, '-');
+        sectionTitle.innerHTML = section;
+        container.appendChild(sectionTitle);
+        items.forEach(([name, price]) => {
+          const div = document.createElement("div");
+          div.className = "menu-item";
+          const priceText = showUSD
+            ? `${(price / exchangeRate).toFixed(2)} $`
+            : `${price.toLocaleString()} L.L.`;
+          div.innerHTML = `<span>${name}</span><span>${priceText}</span>`;
+          container.appendChild(div);
+        });
+      }
+      document.getElementById("currency-btn").textContent = showUSD ? "Show in L.L." : "Show in USD";
+    }
+
+    function toggleCurrency() {
+      showUSD = !showUSD;
+      renderMenu();
+    }
+
+    function scrollToCategory(id) {
+      const headerHeight = document.querySelector('.top-container').offsetHeight;
+      const element = document.getElementById(id.replace(/\s+/g, '-'));
+      if (!element) return;
+      const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementTop - headerHeight,
+        behavior: 'smooth'
+      });
     }
   </script>
 </head>
-<body>
-  <header>
-    <h1>Al Joud Restaurant</h1>
-  </header>
-  <nav>
-    <button onclick="scrollToSection('starters')">Starters</button>
-    <button onclick="scrollToSection('meat')">Meat</button>
-    <button onclick="scrollToSection('quarter')">1/4 Kilo</button>
-    <button onclick="scrollToSection('half')">1/2 Kilo</button>
-  </nav>
+<body onload="renderMenu()">
+  <div class="top-container">
+    <header>
+      <div class="header-left">
+        <img src="IMG_1684.PNG" alt="Al Joud Logo" class="logo" />
+      </div>
+      <div class="header-right">
+        <div class="title">Al Joud Restaurant</div>
+      </div>
+    </header>
 
-  <section id="starters">
-    <h2>Starters</h2>
-    <ul>
-      <li>Mashed Hummus<br>½ oz Meat</li>
-      <li>Mashed Hummus<br>1 oz Meat</li>
-    </ul>
-  </section>
-
-  <section id="meat">
-    <h2>Meat</h2>
-    <ul>
-      <li>Beef Skewers</li>
-      <li>Grilled Chicken</li>
-    </ul>
-  </section>
-
-  <section id="quarter">
-    <h2>1/4 Kilo</h2>
-    <ul>
-      <li>Foul with Lemon</li>
-      <li>Foul with Tahini</li>
-    </ul>
-  </section>
-
-  <section id="half">
-    <h2>1/2 Kilo</h2>
-    <ul>
-      <li>Eggplant Moussaka</li>
-      <li>Hummus with Meat</li>
-    </ul>
-  </section>
-
-  <footer>
-    <h3>Stay connected with us</h3>
-    <div class="footer-icons">
-      <a class="instagram" href="#" aria-label="Instagram">📸</a>
-      <a class="whatsapp" href="#" aria-label="WhatsApp">📱</a>
+    <div class="toolbar">
+      <button onclick="scrollToCategory('Takeaway-Plate')">Takeaway Plate</button>
+      <button onclick="scrollToCategory('Quarter-Kilo')">1/4 Kilo</button>
+      <button onclick="scrollToCategory('Half-Kilo')">1/2 Kilo</button>
+      <button onclick="scrollToCategory('Kilo')">Kilo</button>
+      <button onclick="scrollToCategory('Beverages')">Beverages</button>
+      <button onclick="toggleCurrency()" id="currency-btn">Show in L.L.</button>
+      <button onclick="scrollToCategory('contact')">Stay Connected</button>
+      <button onclick="window.location.href='arabic.html'">العربية</button>
     </div>
-    <div class="tiktok-container">
-      <a class="tiktok" href="#" aria-label="TikTok">🎵</a>
+  </div>
+
+  <div id="menu-container" class="menu-section"></div>
+
+  <div id="contact" class="contact-section">
+    <h3>Stay Connected</h3>
+    <div style="display: flex; justify-content: center; gap: 40px; font-size: 20px; align-items: center; flex-wrap: wrap;">
+      <a href="https://www.instagram.com/al_jud_restaurant/" target="_blank" rel="noopener noreferrer" style="color: #E1306C; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-instagram" style="font-size: 28px;"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://wa.me/96181276214?text=Hello!%20I%20would%20like%20to%20place%20an%20order,%20please%20🍽️" target="_blank" rel="noopener noreferrer" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-whatsapp" style="font-size: 28px;"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://www.tiktok.com/@al_joud_restaurant" target="_blank" rel="noopener noreferrer" style="color: black; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <i class="fab fa-tiktok" style="font-size: 28px;"></i>
+        <span>TikTok</span>
+      </a>
     </div>
-  </footer>
+  </div>
 </body>
 </html>
