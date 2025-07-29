@@ -244,10 +244,11 @@
 
   // Format number with commas, then convert digits and comma to Arabic-Indic digits and Arabic comma
   function toArabicNumeralsWithComma(number) {
-  let formatted = Number(number).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
-  return formatted.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);  // Keep comma as is
-}
-  }
+    // Format number with commas (English style)
+    let formatted = Number(number).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    // Replace digits with Arabic digits and comma with Arabic comma
+    return formatted
+      .replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 
   function renderMenu() {
     const container = document.getElementById("menu-container");
